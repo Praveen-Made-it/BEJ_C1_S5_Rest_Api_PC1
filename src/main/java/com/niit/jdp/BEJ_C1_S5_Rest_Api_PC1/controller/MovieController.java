@@ -24,17 +24,20 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    //Add movie to the database
     @PostMapping("/insertmovie")
     public ResponseEntity<?> saveFunction(@RequestBody Movie movieObj) {
         return new ResponseEntity<>(movieService.saveMovie(movieObj), HttpStatus.CREATED);
     }
 
+    //Fetch movie from the database
     @GetMapping("/fetchallmovies")
     public ResponseEntity<?> fetchFunction() {
         return new ResponseEntity<>(movieService.fetchAllMovies(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/deletemoviebyid")
+    //delete movie from the database
+    @DeleteMapping("/deletemoviebyid/{movieId}")
     public ResponseEntity<?> deleteFunction(@PathVariable int movieId) {
         movieService.deleteMovie(movieId);
         return new ResponseEntity<>(movieService, HttpStatus.OK);
